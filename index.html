@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Love | For You ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;1,700&family=Quicksand:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --soft-pink: #fce4ec; --deep-rose: #ff4d6d; --gold: #d4af37; --text: #3e2723; }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: var(--soft-pink); font-family: 'Quicksand', sans-serif; color: var(--text); overflow-x: hidden; }
+
+        /* --- PRELOADER / ENVELOPE --- */
+        #intro-screen {
+            position: fixed; width: 100%; height: 100vh; background: #fff;
+            z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: 1.5s ease-in-out;
+        }
+        .sealed-letter { width: 120px; cursor: pointer; animation: heartbeat 2s infinite; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+
+        /* --- BACKGROUND MUSIC UI --- */
+        #music-bar {
+            position: fixed; top: 20px; right: 20px; z-index: 5000;
+            background: rgba(255,255,255,0.8); padding: 8px 15px; border-radius: 30px;
+            display: none; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .bar { width: 3px; background: var(--deep-rose); border-radius: 2px; animation: sound 0.5s infinite alternate; }
+        @keyframes sound { 0% { height: 5px; } 100% { height: 20px; } }
+
+        /* --- PAGE LAYOUT --- */
+        .page { 
+            min-height: 100vh; width: 100%; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; padding: 80px 20px; 
+            position: relative; opacity: 0; transform: translateY(30px); transition: 1s;
+        }
+        .page.active { opacity: 1; transform: translateY(0); }
+
+        /* --- PHOTO STYLES --- */
+        .photo-frame {
+            position: relative; width: 280px; height: 350px; background: white;
+            padding: 15px 15px 50px 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: rotate(-2deg); margin-bottom: 30px; border-radius: 2px;
+        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; border: 1px solid #eee; }
+        
+        /* --- BURST ANIMATION --- */
+        /* Naya falling animation */
+        .falling-heart {
+             position: fixed;
+             top: -50px;
+             z-index: 9998;
+             pointer-events: none;
+             animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- TEXT STYLES --- */
+        .caption { 
+            font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; 
+            max-width: 500px; text-align: center; line-height: 1.6; margin-top: 20px;
+        }
+        .highlight { color: var(--deep-rose); font-weight: bold; }
+        .big-title { font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--deep-rose); text-align: center; }
+
+        .petal { position: absolute; pointer-events: none; animation: fall 7s linear infinite; opacity: 0.6; z-index: 1; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0); } 100% { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <img src="https://cdn-icons-png.flaticon.com/512/3062/3062630.png" class="sealed-letter" onclick="startExperience()">
+        <p style="margin-top: 20px; letter-spacing: 2px; font-size: 0.9rem;">FOR YOUR EYES ONLY</p>
+    </div>
+
+    <div id="music-bar">
+        <div class="bar" style="animation-delay: 0.1s"></div>
+        <div class="bar" style="animation-delay: 0.3s"></div>
+        <div class="bar" style="animation-delay: 0.2s"></div>
+        <span style="font-size: 0.8rem; font-weight: bold;">Playing Romantic Lo-fi...</span>
+    </div>
+
+    <audio id="bg-audio" loop src="https://www.bensound.com/bensound-music/bensound-romantic.mp3"></audio>
+
+    <div id="letter-content" style="display: none;">
+        <section class="page active">
+            <h1 class="big-title">The Infinity Letter</h1>
+            <p style="font-size: 1.2rem; font-family: 'Dancing Script';">To the person who holds my heart... ✨</p>
+            <p style="margin-top: 50px; opacity: 0.5; font-size: 0.8rem;">Scroll down to begin our journey</p>
+        </section>
+
+        <section class="page">
+            <div class="photo-frame">
+                <img src="download (39).jpg" alt="Memory">
+            </div>
+            <div class="caption">"Yaad hai ye din? Yahan se sab shuru hua tha. Tumhare wo pehli smile aur meri <span class="highlight">dhadkan ka ruk jana</span>."</div>
+        </section>
+
+        <section class="page">
+            <div class="photo-frame" style="transform: rotate(3deg);">
+                <img src="darama.jpg" alt="Memory">
+            </div>
+            <div class="caption">"Log kehte hain jannat upar hai, par maine tumhare saath har pal mein <span class="highlight">sukoon</span> mehsoos kiya hai."</div>
+        </section>
+
+        <section class="page">
+            <h1 class="big-title" style="font-size: 2.5rem;">A Promise to You</h1>
+            <div class="caption">"Main ye nahi kehta ki raaste hamesha aasaan honge, par main ye zaroor kehta hun ki <span class="highlight">tumhara hath kabhi nahi chodunga</span>."</div>
+        </section>
+
+        <section class="page">
+            <h1 class="big-title">Touch My Heart</h1>
+            <div id="main-heart" style="font-size: 8rem; cursor: pointer; user-select: none; transition: 0.3s;" onclick="loveExplosion(event)">❤️</div>
+            <p class="caption">Tap the heart to see my love!</p>
+        </section>
+
+        <section class="page">
+            <div class="photo-frame" style="transform: rotate(-3deg);">
+                <img src="download (40).jpg" alt="Memory">
+            </div>
+            <div class="caption">"Har baar jab tum hasti ho, meri duniya thodi aur <span class="highlight">bright</span> ho jati hai."</div>
+        </section>
+
+        <section class="page" style="background: #fffafa;">
+            <div style="padding: 30px; border: 1px solid #eee; border-radius: 15px; max-width: 500px; background: white; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                <p class="big-title" style="font-size: 2rem; text-align: left;">My Dearest,</p>
+                <p style="line-height: 1.8; margin-top: 15px;">
+                    Tum sirf meri pasand nahi, meri zarurat ho. Is digital letter ke har word mein meri sacchi feeling hai. I hope ye tumhe wo smile de sake jo tumne mujhe di hai.
+                </p>
+                <p style="margin-top: 25px; font-weight: bold;">Yours, Forever. ❤️</p>
+            </div>
+        </section>
+
+        <section class="page">
+            <h1 class="big-title">Happy Valentine's Day!</h1>
+            <p class="caption">You are the most beautiful part of my life.</p>
+            <div style="margin-top: 40px;">
+                <a href="https://wa.me/?text=This%20is%20the%20best%20gift%20ever!%20I%20love%20you ❤️" 
+                   style="text-decoration: none; background: var(--deep-rose); color: white; padding: 15px 35px; border-radius: 50px; font-weight: bold; box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3); display: inline-block;">
+                   Reply with Love 💌
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function startExperience() {
+            document.getElementById('intro-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('intro-screen').style.display = 'none';
+                document.getElementById('letter-content').style.display = 'block';
+                document.getElementById('music-bar').style.display = 'flex';
+                document.getElementById('bg-audio').play();
+                initScrollObserver();
+            }, 1000);
+        }
+
+        function initScrollObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.page').forEach(page => observer.observe(page));
+        }
+
+        function spawnPetals() {
+            const petal = document.createElement('div');
+            const icons = ['🌸', '✨', '💕'];
+            petal.className = 'petal';
+            petal.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.fontSize = (Math.random() * 15 + 10) + 'px';
+            document.body.appendChild(petal);
+            setTimeout(() => petal.remove(), 7000);
+        }
+        setInterval(spawnPetals, 500);
+
+     function loveExplosion(e) {
+    const heart = document.getElementById('main-heart');
+    heart.style.transform = "scale(0.8)";
+    setTimeout(() => heart.style.transform = "scale(1)", 100);
+
+    const colors = ['❤️', '💖', '💝', '💕', '💗', '💘'];
+    
+    // --- PART 1: EXPLOSION (Jo pehle se tha) ---
+    for(let i=0; i<15; i++) {
+        const burst = document.createElement('div');
+        burst.className = 'burst-heart';
+        burst.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+        burst.style.left = e.clientX + 'px';
+        burst.style.top = e.clientY + 'px';
+        
+        const x = (Math.random() - 0.5) * 400;
+        const y = (Math.random() - 0.5) * 400;
+        const r = Math.random() * 360;
+        
+        burst.style.setProperty('--x', `${x}px`);
+        burst.style.setProperty('--y', `${y}px`);
+        burst.style.setProperty('--r', `${r}deg`);
+        
+        document.body.appendChild(burst);
+        setTimeout(() => burst.remove(), 2000);
+    }
+
+    // --- PART 2: FALLING HEARTS (Naya Animation) ---
+    for(let i=0; i<25; i++) {
+        setTimeout(() => {
+            const fallHeart = document.createElement('div');
+            fallHeart.className = 'falling-heart';
+            fallHeart.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Random horizontal position, size and speed
+            fallHeart.style.left = Math.random() * 100 + "vw";
+            fallHeart.style.fontSize = Math.random() * 20 + 15 + "px";
+            const duration = Math.random() * 3 + 3; // 3s to 6s
+            fallHeart.style.animationDuration = duration + "s";
+            
+            document.body.appendChild(fallHeart);
+            
+            // Cleanup
+            setTimeout(() => fallHeart.remove(), duration * 1000);
+        }, i * 100); // 100ms ke gap mein ek ek heart girega
+    }
+}
+            const heart = document.getElementById('main-heart');
+            heart.style.transform = "scale(0.8)";
+            setTimeout(() => heart.style.transform = "scale(1)", 100);
+
+            const colors = ['❤️', '💖', '💝', '💕', '💗', '💘'];
+            
+            for(let i=0; i<15; i++) {
+                const burst = document.createElement('div');
+                burst.className = 'burst-heart';
+                burst.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Position at click or center of heart
+                burst.style.left = e.clientX + 'px';
+                burst.style.top = e.clientY + 'px';
+                
+                // Random directions
+                const x = (Math.random() - 0.5) * 400;
+                const y = (Math.random() - 0.5) * 400;
+                const r = Math.random() * 360;
+                
+                burst.style.setProperty('--x', `${x}px`);
+                burst.style.setProperty('--y', `${y}px`);
+                burst.style.setProperty('--r', `${r}deg`);
+                
+                document.body.appendChild(burst);
+                setTimeout(() => burst.remove(), 2000);
+            }
+        
+    </script>
+</body>
+</html>
